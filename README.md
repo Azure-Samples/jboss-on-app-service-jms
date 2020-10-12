@@ -1,4 +1,4 @@
-# JMS on
+# JMS with JBoss EAP on Azure App Service
 
 This repository contains a sample that demonstrates how a Java EE app can be deployed to a managed JBoss server in App Service. The `frontend-app-payments-client` directory contains a Java SE app that sends JMS messages to Azure Service Bus. The Java EE app in the `backend-app-jbosseap-jms-mdb` directory uses Message Driven Beans for processing JMS messages sent by the Java SE app. When the MDB processes the JMS messages, you will be able to see log messages on the application's stdout (log stream in Azure portal).
 
@@ -9,9 +9,7 @@ This project framework provides the following features:
 * Azure App Service (a Spring Boot app and a JBoss EAP app)
 * Azure Service Bus
 
-## Getting Started
-
-### Prerequisites
+## Prerequisites
 
 - An Azure Subscription
 - The Azure CLI installed locally
