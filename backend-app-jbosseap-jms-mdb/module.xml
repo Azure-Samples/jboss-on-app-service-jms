@@ -1,0 +1,25 @@
+<module xmlns="urn:jboss:module:1.1" name="org.jboss.genericjms.provider"> 
+  <resources> 
+      <resource-root path="proton-j-0.31.0.jar"/> 
+      <resource-root path="qpid-jms-client-0.40.0.jar"/>
+      <resource-root path="slf4j-log4j12-1.7.25.jar"/>
+      <resource-root path="slf4j-api-1.7.25.jar"/>
+      <resource-root path="log4j-1.2.17.jar"/>      
+      <resource-root path="netty-buffer-4.1.32.Final.jar" />
+      <resource-root path="netty-codec-4.1.32.Final.jar" />
+      <resource-root path="netty-codec-http-4.1.32.Final.jar" />
+      <resource-root path="netty-common-4.1.32.Final.jar" />
+      <resource-root path="netty-handler-4.1.32.Final.jar" />
+      <resource-root path="netty-resolver-4.1.32.Final.jar" />
+      <resource-root path="netty-transport-4.1.32.Final.jar" />
+      <resource-root path="netty-transport-native-epoll-4.1.32.Final-linux-x86_64.jar" />
+      <resource-root path="netty-transport-native-kqueue-4.1.32.Final-osx-x86_64.jar" />
+      <resource-root path="netty-transport-native-unix-common-4.1.32.Final.jar" /> 
+      <resource-root path="qpid-jms-discovery-0.40.0.jar" />
+  </resources> 
+
+   <dependencies> 
+      <module name="javax.api"/> 
+      <module name="javax.jms.api"/> 
+  </dependencies> 
+</module>

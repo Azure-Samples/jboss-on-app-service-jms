@@ -1,0 +1,53 @@
+### Step ONE - Clone and Prep - DO THIS JUST ONCE
+mkdir readyworkshop
+git clone --recurse-submodules https://github.com/Azure-Samples/migrate-java-ee-app-to-azure-2
+cd migrate-Java-EE-app-to-azure-2
+yes | cp -rf .prep/* .
+cd quickstart
+mvn clean install
+#############
+
+### Create and Configure Azure Service Bus
+az login
+cd helloworld-jms
+mkdir .scripts
+cp set-env-variables-template.sh .scripts/set-env-variables.sh
+vi .scripts/set-env-variables.sh
+. .scripts/set-env-variables.sh
+
+### Deploy to Azure - Create the Service Bus
+
+az group create --name ${RESOURCEGROUP_NAME} \
+    --location ${REGION}
+    
+az servicebus namespace create \
+    --name  ${DEFAULT_SBNAMESPACE} \
+    --resource-group ${RESOURCEGROUP_NAME}
+
+az servicebus queue create \
+    --name ${SB_QUEUE} \
+    --namespace-name ${DEFAULT_SBNAMESPACE} \
+    --resource-group ${RESOURCEGROUP_NAME}
+
+az servicebus queue authorization-rule create \
+    --name ${SB_SAS_POLICY} \
+    --namespace-name ${DEFAULT_SBNAMESPACE} \
+    --queue-name ${SB_QUEUE} \
+    --resource-group ${RESOURCEGROUP_NAME} \
+    --rights Listen Send
+
+az servicebus queue authorization-rule keys list \
+    --name ${SB_SAS_POLICY} \
+    --namespace-name ${DEFAULT_SBNAMESPACE} \
+    --queue-name ${SB_QUEUE} \
+    --resource-group ${RESOURCEGROUP_NAME}
+
+### Modify .scripts/set-env-variables.sh
+vi .scripts/set-env-variables.sh
+
+#From the values displayed for the keys, grab the primarykey value. Open the .scripts/set-env-variables.sh file and set the primaryKey as value for variable SB_SAS_KEY
+
+. .scripts/set-env-variables.sh
+
+#Run the JMS API console app
+mvn clean compile exec:java -Dexec.cleanupDaemonThreads=false

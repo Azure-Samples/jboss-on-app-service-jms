@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.3.2.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.example</groupId>
+	<artifactId>frontend</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>frontend</name>
+	<description>Demo project for Spring Boot</description>
+
+	<properties>
+		<java.version>8</java.version>
+	</properties>
+
+	<dependencies>
+	<!-- JMS BEGIN -->
+
+        <dependency>
+            <groupId>org.apache.qpid</groupId>
+            <artifactId>qpid-jms-client</artifactId>
+            <version>0.40.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.qpid</groupId>
+            <artifactId>proton-j</artifactId>
+            <version>0.31.0</version>
+        </dependency>
+
+	<!-- JMS END -->
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.junit.vintage</groupId>
+					<artifactId>junit-vintage-engine</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+    <plugin>
+        <groupId>com.microsoft.azure</groupId>
+        <artifactId>azure-webapp-maven-plugin</artifactId>
+        <version>1.5.3</version>
+        <configuration>
+            <!-- Web App information -->
+            <resourceGroup>${FRONTEND_RESOURCEGROUP_NAME}</resourceGroup>
+            <appServicePlanName>${FRONTEND_WEBAPP_PLAN_NAME}</appServicePlanName>
+            <appName>${FRONTEND_WEBAPP_NAME}</appName>
+            <region>${REGION}</region>
+            <!-- Java Runtime Stack for Web App on Linux-->
+            <linuxRuntime>jre8</linuxRuntime>
+               <appSettings>
+                <property>
+                    <name>DEFAULT_SBNAMESPACE</name>
+                    <value>${DEFAULT_SBNAMESPACE}</value>
+                </property>
+                <property>
+                    <name>SB_SAS_POLICY</name>
+                    <value>${SB_SAS_POLICY}</value>
+                </property>
+                <property>
+                    <name>SB_SAS_KEY</name>
+                    <value>${SB_SAS_KEY}</value>
+                </property>
+                <property>
+                    <name>PROVIDER_URL</name>
+                    <value>${PROVIDER_URL}</value>
+                </property>
+                <property>
+                    <name>SB_QUEUE</name>
+                    <value>${SB_QUEUE}</value>
+                </property>
+                <property>
+                    <name>SB_TOPIC</name>
+                    <value>${SB_TOPIC}</value>
+                </property>
+                <property>
+                    <name>PROP_HELLOWORLDMDB_CONN</name>
+                    <value>${PROP_HELLOWORLDMDB_CONN}</value>
+                </property>
+                <property>
+                    <name>PROP_HELLOWORLDMDB_QUEUE</name>
+                    <value>${PROP_HELLOWORLDMDB_QUEUE}</value>
+                </property>
+                 <property>
+                    <name>PROP_HELLOWORLDMDB_TOPIC</name>
+                    <value>${PROP_HELLOWORLDMDB_TOPIC}</value>
+                </property>
+            </appSettings>
+        </configuration>
+    </plugin>
+		</plugins>
+	</build>
+
+</project>
