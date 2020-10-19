@@ -1,3 +1,6 @@
+#!/bin/sh
+# This script creates a Service Bus Namespace and Queue within a resource group.
+
 az group create --name ${SERVICEBUS_RESOURCEGROUP_NAME} \
     --location ${REGION}
     
