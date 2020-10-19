@@ -18,18 +18,34 @@ This project framework provides the following features:
 
 Run the following commands in `bash` on Linux or `WSL` on Windows. Carefully note the comments in the instructions below that specify manual steps needed. The steps will build and deploy the app in Azure in the resource group you specifiy in `setenv-azure.sh`. NOTE: Because of the way the script deploys the JBoss app, it takes around 5 minutes for the app to be up and running.
 
-```bash
+### Setup
 
+First, log into the Azure CLI and set the subscription you want to use for this tutorial. Replace `SUBSCRIPTION-ID` with your subscription ID.
+
+```bash
 az login
 
-# MANUAL TODO: Set the subscription you want to use
-az account set -s __REPLACEME__SUBSCRIPTIONID__
+az account set -s SUBSCRIPTION-ID.
+```
 
-# MANUAL TODO: cd jbosseap-jms-mdb-sample
+Next, copy the script templates from `scripts/` to `.scripts/`.
 
-# Copy the files in scripts/ to .scripts/
+```bash
 source scripts/fork.sh
+```
 
+### Configure resource groups
+
+1. Once the files are copied to `.scripts/`, open [setenv-azure.sh](.scripts/setenv-azure.sh) and replace the placeholder (`__REPLACEME__`) with the string you want to use for the resource group.
+1. Run the script to set the resource group and resource names
+
+  ```bash
+  source .scripts/setenv-azure.sh
+  ```
+
+### 
+
+```
 # MANUAL TODO: Modify .scripts/setenv-azure.sh 
 source .scripts/setenv-azure.sh
 
