@@ -39,29 +39,29 @@ source scripts/fork.sh
 1. Once the files are copied to `.scripts/`, open [setenv-azure.sh](.scripts/setenv-azure.sh) and replace the placeholder (`__REPLACEME__`) with the string you want to use for the resource group.
 1. Run the script to set the resource group and resource names.
 
-  ```bash
-  source .scripts/setenv-azure.sh
-  ```
+    ```bash
+    source .scripts/setenv-azure.sh
+    ```
 
 ### Create Service Bus
 
 1. Create the Service Bus namespace and queue. This script will also set the *listen* and *send* authorizations on the queue.
 
-  ```bash
-  source .scripts/configure-servicebus.sh
-  ```
+    ```bash
+    source .scripts/configure-servicebus.sh
+    ```
 
 2. The next script will copy the Service Bus SAS Key and set it as an environment variable. This SAS key will be set as an environment variable on the web app in the next section.
 
-  ```bash
-  source .scripts/setenv-servicebus.sh
-  ```
+    ```bash
+    source .scripts/setenv-servicebus.sh
+    ```
 
 3. Test the Service Bus queue
 
-  ```bash
-  source console-app-jms/run.sh
-  ```
+    ```bash
+    source console-app-jms/run.sh
+    ```
 
 ### Create web apps
 
