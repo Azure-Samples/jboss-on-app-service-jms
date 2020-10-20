@@ -2,6 +2,20 @@
 
 This repository contains a sample that demonstrates how a Java EE app can be deployed to a managed JBoss server in App Service. The `frontend-app-payments-client` directory contains a Java SE app that sends JMS messages to Azure Service Bus. The Java EE app in the `backend-app-jbosseap-jms-mdb` directory uses Message Driven Beans for processing JMS messages sent by the Java SE app. When the MDB processes the JMS messages, you will be able to see log messages on the application's stdout (log stream in Azure portal).
 
+- [JMS with JBoss EAP on Azure App Service](#jms-with-jboss-eap-on-azure-app-service)
+  - [Overview](#overview)
+    - [Directories and files](#directories-and-files)
+  - [Prerequisites](#prerequisites)
+  - [Setup](#setup)
+  - [Tutorial](#tutorial)
+    - [Create the resource groups](#create-the-resource-groups)
+    - [Create the Service Bus Queue](#create-the-service-bus-queue)
+    - [Create the web apps](#create-the-web-apps)
+  - [Demo](#demo)
+  - [Clean up resources](#clean-up-resources)
+  - [Notes](#notes)
+    - [Helpful resources](#helpful-resources)
+
 ## Overview
 
 This sample repository demonstrates how to to deploy a Spring Boot app and JBoss EAP app onto Azure App Service. This repository also deploys an Azure Service Bus Queue to act as a broker for JMS messages between the two applictions. The Spring Boot app publishes mock employee records to the queue, which are consumed and processed by the JBoss site for salary payments. You can also publish messages from a local console app to test the queue.  
@@ -117,16 +131,32 @@ source run.sh
 
 ## Demo
 
-Now that the resources are deployed...
+Now that the resources are deployed, you can send messages from the frontend client app to the JBoss EAP site for processing.
 
-## Clean up
+1. Open the frontend web app. You can find the resource in the Azure Portal by navigating to the resource group you specified earlier in the tutorial. Once you find the web app resources, click **Browse** from the **Overview** blade.
+1. Start the log stream of the JBoss EAP site in another tab. Open the backend web app in the Portal, and go to **Monitoring** > **Log stream**.
+1. In the frontend app, click the **Process payments** button.
+
+    ![Click the process payments button](images/process-payments-button.png)
+    > This button sends an Ajax request to the [`/payments/process` route](frontend-app-payments-client/src/main/java/com/example/servingwebcontent/PaymentsController.java).
+
+1. Click over to the JBoss EAP log stream, and you should see output like what is shown below.
+
+    ![JBoss EAP log stream](images/log-stream.png)
+
+## Clean up resources
+
+Run the command below to delete the resource group and its resources.
 
 ```bash
-TODO
+az group delete --name ${BASE_RESOURCEGROUP_NAME}
 ```
 
 ## Notes
 
-- Disclaimer about authorization.
-- Best practices around Service Bus authorization
-- 
+This tutorial and demo is meant for demonstration purposes. Please see this article for [security best practices with Azure Service Bus](https://docs.microsoft.com/azure/service-bus-messaging/service-bus-messaging-security-controls).
+
+### Helpful resources
+
+- [Java on App Service reference documentation](https://docs.microsoft.com/azure/app-service/configure-language-java?pivots=platform-linux)
+- [How to configure a database connection on JBoss EAP on App Service](https://github.com/Azure-Samples/jboss-on-app-service)
