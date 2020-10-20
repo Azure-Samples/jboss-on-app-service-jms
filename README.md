@@ -20,14 +20,11 @@ A quick overview of the contents of this repository
 ## Prerequisites
 
 - An Azure Subscription
-- The Azure CLI [installed locally](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)
-- For Windows users, have [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) installed. You can confirm WSL is installed by running `wsl` in PowerShell.
+- Maven [installed locally](https://maven.apache.org/install.html)
+- The Azure CLI [installed locally](https://docs.microsoft.com/cli/azure/install-azure-cli)
+- For Windows users, have [Windows Subsystem for Linux](https://docs.microsoft.com/windows/wsl/install-win10) installed. You can confirm WSL is installed by running `wsl` in PowerShell.
 
-## Tutorial
-
-Throughout this tutorial you will run shell scripts that create and configure the Azure resources for you. Run the commands in `bash` on Linux or `WSL` on Windows. 
-
-### Setup
+## Setup
 
 First, log into the Azure CLI and set the subscription you want to use for this tutorial. Replace `SUBSCRIPTION-ID` with your subscription ID.
 
@@ -42,6 +39,12 @@ Next, copy the script templates from `scripts/` to `.scripts/`.
 ```bash
 source scripts/fork.sh
 ```
+
+## Tutorial
+
+Throughout this tutorial you will run shell scripts that create and configure the Azure resources for you. Run the commands in `bash` on Linux or `WSL` on Windows.
+
+> In a hurry? See the [abridged instructions](abridged-instructions.md).
 
 ### Create the resource groups
 
@@ -66,34 +69,64 @@ source scripts/fork.sh
     source .scripts/setenv-servicebus.sh
     ```
 
-3. Test the Service Bus queue
+3. Now you can run the console application (in [console-app-jms](console-app-jms/)) to test the Service Bus queue. The command below will build the Java console app, start it, and send 4 messages to the queue.
 
     ```bash
-    source console-app-jms/run.sh
+    mvn -f console-app-jms/ clean compile exec:java \
+    -Dexec.cleanupDaemonThreads=false \
+    -Dmessage.content=TestMessage \
+    -Dmessage.count=4
     ```
+
+    There will be a lot of output from Maven showing the dependency installation and build progress. At the very end you should see the output shown below. You can see that the application queued 4 messages, then read them from the queue in a separate process.
+
+    ```log
+    Oct 20, 2020 11:51:58 AM org.jboss.as.quickstarts.jms.HelloWorldJMSClient main
+    INFO: Sending 4 messages with content: TestMessage
+    Oct 20, 2020 11:51:59 AM org.jboss.as.quickstarts.jms.HelloWorldJMSClient main
+    INFO: Received message with content TestMessage
+    Oct 20, 2020 11:51:59 AM org.jboss.as.quickstarts.jms.HelloWorldJMSClient main
+    INFO: Received message with content TestMessage
+    Oct 20, 2020 11:51:59 AM org.jboss.as.quickstarts.jms.HelloWorldJMSClient main
+    INFO: Received message with content TestMessage
+    Oct 20, 2020 11:51:59 AM org.jboss.as.quickstarts.jms.HelloWorldJMSClient main
+    INFO: Received message with content TestMessage
+    ```
+
+    If you ran into a problem, please [file an issue](https://github.com/Azure-Samples/jboss-on-app-service-jms/issues/new).
 
 ### Create the web apps
 
-Now you will create the Spring Boot and JBoss EAP sites on App Service. The Spring Boot app will act as a frontend which sends messages to the JBoss EAP site for processing. Run the script below to create the JBoss EAP site, build the WAR app, and deploy it to the site. You can read the script for more information.
+Now it's time to create the Spring Boot and JBoss EAP sites on App Service. The Spring Boot app will act as a frontend which sends messages to the JBoss EAP site for processing. Run the script below to create the JBoss EAP site, build the WAR app, and deploy it to the site. You can read the script for more information.
+
+Switch directories into the `backend-app-jbosseap-jms-mdb` directory and run the script as shown below.
 
 ```bash
-source backend-app-jbosseap-jms-mdb/run.sh
+cd backend-app-jbosseap-jms-mdb/
+source run.sh
 ```
 
-> Because of the way the script deploys the JBoss app, it takes around 5 minutes for the app to be up and running.
+> Because of the way the script deploys the JBoss app, it takes around 5 minutes for the app to be fully up and running.
 
 When the JBoss EAP site is up, run the script below to create the Java SE site, build the Spring Boot app, and deploy it.
 
 ```bash
-source frontend-app-payments-client/run.sh
+cd frontend-app-payments-client
+source run.sh
 ```
 
-### Demo
+## Demo
 
-TODO
+Now that the resources are deployed...
 
-### Clean up
+## Clean up
 
 ```bash
 TODO
 ```
+
+## Notes
+
+- Disclaimer about authorization.
+- Best practices around Service Bus authorization
+- 

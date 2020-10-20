@@ -31,3 +31,21 @@ export BACKEND_WEBAPP_PLAN_NAME=${BASE_WEBAPP_PLAN_NAME}
 export BACKEND_WEBAPP_NAME=backend-${BASE_WEBAPP_NAME}
 
 export DEFAULT_SBNAMESPACE=${BASE_DEFAULT_SBNAMESPACE}-sbus
+
+echo "
+    Environment variables set! Summary is below.
+    
+    Frontend resource group name:       ${FRONTEND_RESOURCEGROUP_NAME}
+    Backend resource group name:        ${BACKEND_RESOURCEGROUP_NAME}
+    Service Bus resource group name:    ${SERVICEBUS_RESOURCEGROUP_NAME}
+    Region for resources:               ${REGION}
+
+    Frontend webapp name:               ${FRONTEND_WEBAPP_NAME}
+    Frontend App Service Plan name:     ${FRONTEND_WEBAPP_PLAN_NAME}
+
+    Backend webapp name:                ${BACKEND_WEBAPP_NAME}
+    Backend App Service Plan name:      ${BACKEND_WEBAPP_PLAN_NAME}
+
+    Service Bus Namespace:              ${DEFAULT_SBNAMESPACE}
+    Service Bus queue name:             ${SB_QUEUE}
+"

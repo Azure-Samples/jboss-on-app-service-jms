@@ -1,2 +1,4 @@
-mvn clean package azure-webapp:deploy
-
+(
+    set -x;
+    mvn --batch-mode clean package azure-webapp:deploy
+)
