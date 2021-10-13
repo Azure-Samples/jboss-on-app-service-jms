@@ -18,7 +18,7 @@ This repository contains a sample that demonstrates how a Java EE app can be dep
 
 ## Overview
 
-This sample repository demonstrates how to to deploy a Spring Boot app and JBoss EAP app onto Azure App Service. This repository also deploys an Azure Service Bus Queue to act as a broker for JMS messages between the two applictions. The Spring Boot app publishes mock employee records to the queue, which are consumed and processed by the JBoss site for salary payments. You can also publish messages from a local console app to test the queue.  
+This sample repository demonstrates how to deploy a Spring Boot app and JBoss EAP app onto Azure App Service. This repository also deploys an Azure Service Bus Queue to act as a broker for JMS messages between the two applictions. The Spring Boot app publishes mock employee records to the queue, which are consumed and processed by the JBoss site for salary payments. You can also publish messages from a local console app to test the queue.  
 
 ![Overview of the sample's architecture](jboss-jms-architecture.png)
 > The diagram above shows all the resources that are deployed in this sample, and the relationships between them.
