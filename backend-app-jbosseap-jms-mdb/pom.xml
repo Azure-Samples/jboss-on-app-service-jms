@@ -88,14 +88,14 @@
     <plugin>
         <groupId>com.microsoft.azure</groupId>
         <artifactId>azure-webapp-maven-plugin</artifactId>
-        <version>1.5.3</version>
+        <version>2.2.0</version>
         <configuration>
             <!-- Web App information -->
             <resourceGroup>${BACKEND_RESOURCEGROUP_NAME}</resourceGroup>
             <appServicePlanName>${BACKEND_WEBAPP_PLAN_NAME}</appServicePlanName>
             <appName>${BACKEND_WEBAPP_NAME}</appName>
             <region>${REGION}</region>
-            <pricingTier>P3V2</pricingTier>
+            <pricingTier>P1v3</pricingTier>
             <!-- Java Runtime Stack for Web App on Linux-->
             <linuxRuntime>wildfly 14-jre8</linuxRuntime>
                <appSettings>
@@ -119,24 +119,16 @@
                     <name>SB_QUEUE</name>
                     <value>${SB_QUEUE}</value>
                 </property>
-                <property>
-                    <name>SB_TOPIC</name>
-                    <value>${SB_TOPIC}</value>
-                </property>
-                <property>
-                    <name>PROP_HELLOWORLDMDB_CONN</name>
-                    <value>${PROP_HELLOWORLDMDB_CONN}</value>
-                </property>
-                <property>
-                    <name>PROP_HELLOWORLDMDB_QUEUE</name>
-                    <value>${PROP_HELLOWORLDMDB_QUEUE}</value>
-                </property>
-                 <property>
-                    <name>PROP_HELLOWORLDMDB_TOPIC</name>
-                    <value>${PROP_HELLOWORLDMDB_TOPIC}</value>
-                </property>
             </appSettings>
         </configuration>
+        <dependencies>
+          <!-- API, java.xml.bind module -->
+          <dependency>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+            <version>2.3.2</version>
+          </dependency>      
+        </dependencies>        
     </plugin>
   </plugins>
  </build>

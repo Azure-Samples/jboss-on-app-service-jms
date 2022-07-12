@@ -6,7 +6,7 @@ set -x #echo on
 az group create --name ${SERVICEBUS_RESOURCEGROUP_NAME} \
     --location ${REGION}
     
-az servicebus namespace create \
+az servicebus namespace create --sku Premium \
     --name  ${DEFAULT_SBNAMESPACE} \
     --resource-group ${SERVICEBUS_RESOURCEGROUP_NAME}
 

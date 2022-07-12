@@ -1,5 +1,5 @@
-echo "Installing 'zip' utility"
-sudo apt install -qqq -y zip
+#echo "Installing 'zip' utility"
+#sudo apt install -qqq -y zip
 
 # Build and deploy using maven, but then use CLI to convert site to JBoss site as Maven plugin does not support that yet
 echo "Creating the web app..."
@@ -36,7 +36,7 @@ echo "Deploying the .zip file..."
 
 # Now that all contents are uploaded, define the startup.sh file
 echo "Finalizing configuration for JBoss EAP site..."
-az webapp config set -g $BACKEND_RESOURCEGROUP_NAME --name $BACKEND_WEBAPP_NAME --linux-fx-version "JBOSSEAP|7.2-java8" --number-of-workers 1 --startup-file /home/site/wwwroot/startup.sh 
+az webapp config set -g $BACKEND_RESOURCEGROUP_NAME --name $BACKEND_WEBAPP_NAME --linux-fx-version "JBOSSEAP|7.3-java8" --number-of-workers 1 --startup-file /home/site/wwwroot/startup.sh 
 
 az webapp restart -g ${BACKEND_RESOURCEGROUP_NAME} --name ${BACKEND_WEBAPP_NAME}
 
