@@ -19,7 +19,7 @@ This repository contains a sample that demonstrates how a Java EE app can be dep
 ## Overview
 
 > [!NOTE]
-> For Spring applications, we recommend using Azure Spring Apps. However, you can still use Azure App Service as a destination.
+> For Spring applications, we recommend using Azure Spring Apps. However, you can still use Azure App Service as a destination. See [Java Workload Destination Guide](https://aka.ms/javadestinations) for advice. 
 
 This sample repository demonstrates how to deploy a Spring Boot app and JBoss EAP app onto Azure App Service. This repository also deploys an Azure Service Bus Queue to act as a broker for JMS messages between the two applictions. The Spring Boot app publishes mock employee records to the queue, which are consumed and processed by the JBoss site for salary payments. You can also publish messages from a local console app to test the queue.  
 
